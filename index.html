@@ -175,7 +175,7 @@
 
   </div>
 	
-<!-- Force External Browser Fallback UI -->
+
 <div id="externalBrowserOverlay" 
      style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92);
      color:white; z-index:9999999; padding:25px; text-align:center; font-family:sans-serif;">
@@ -195,14 +195,24 @@
   </p>
 </div>
 
-<script>
-// -------------------------------------------
-//    UNIVERSAL IN-APP BROWSER ESCAPE ENGINE
-// -------------------------------------------
+<div id="openBrowserOverlay" 
+     style="display:none; position:fixed; inset:0; background:black;
+     color:white; z-index:99999; text-align:center; padding:30px;">
+  
+  <h2 style="font-size:26px; margin-bottom:10px;">Open in Browser</h2>
+  <p style="font-size:18px; line-height:1.6;">
+    This page cannot open inside this app.
+    <br><br>
+    Tap the menu (<b>⋯</b> or <b>…</b>) and choose 
+    <span style="color:#00d0ff; font-weight:bold;">“Open in browser”</span>
+  </p>
 
-// Detect TikTok / Instagram / Facebook / X / Snapchat WebViews
-function isInAppBrowser() {
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  <img src="images/openbrowser.png" width="220" style="margin-top:25px;">
+</div>
+
+<script>
+function isInApp() {
+  const ua = navigator.userAgent || "";
   return (
     ua.includes("TikTok") ||
     ua.includes("Instagram") ||
@@ -211,52 +221,20 @@ function isInAppBrowser() {
     ua.includes("Messenger") ||
     ua.includes("Twitter") ||
     ua.includes("Snapchat") ||
-    ua.includes("Line/") ||
-    ua.includes("Pinterest")
+    ua.includes("Line/")
   );
 }
 
-// Attempt to escape automatically using the Share→Browser trick
-async function tryExternalOpen(url) {
-  try {
-    // Works on TikTok / IG / Facebook when allowed
-    await navigator.share({ title: "Open", url: url });
-    return true; // Browser opened
-  } catch (e) {
-    // If share fails or is blocked, we fallback
-    return false;
-  }
-}
-
-function showOverlay() {
-  document.getElementById("externalBrowserOverlay").style.display = "flex";
-}
-
 document.addEventListener("DOMContentLoaded", function () {
+  if (isInApp()) {
+    document.getElementById("openBrowserOverlay").style.display = "block";
 
-  // Attach safe click-handler to your link
-  const linkEl = document.querySelector(".socialmedialink");
-  const targetURL = "https://links.tillymae.bio";
-
-  linkEl.addEventListener("click", async function (e) {
-    if (!isInAppBrowser()) {
-      // Normal browser → behave normally
-      return;
-    }
-
-    // Inside TikTok/IG/etc.
-    e.preventDefault();
-
-    // 1️⃣ Attempt auto-escape
-    const success = await tryExternalOpen(targetURL);
-
-    if (success) return; // Opened in real browser
-
-    // 2️⃣ Auto-escape blocked → show overlay instructions
-    showOverlay();
-  });
+    // Hide your main content too (optional)
+    document.body.style.overflow = "hidden";
+  }
 });
 </script>
+
 
 
 
