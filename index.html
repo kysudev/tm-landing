@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" data-next-head=""/>
 <link rel="icon" href="/favicon.webp" data-next-head=""/>
 
-
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
-
 
 <meta name="themeName" content="dark" data-next-head=""/>
 <meta http-equiv="x-dns-prefetch-control" content="on" data-next-head=""/>
@@ -179,68 +177,6 @@
     </div>
 
   </div>
-	
-
-<div id="openBrowserOverlay" 
-     style="display:none; position:fixed; inset:0; background:black;
-     color:white; z-index:9999999; text-align:center; padding:30px;">
-  
-  <h2 style="font-size:26px; margin-bottom:10px;">Open in Browser</h2>
-  <p style="font-size:18px; line-height:1.6;">
-    This page cannot open inside this app.
-    Tap the menu (<b>⋯</b> or <b>…</b>) and choose:
-    <br><br>
-    <span style="color:#00d0ff; font-weight:bold;">“Open in Browser”</span>
-  </p>
-</div>
-
-<script>
-// FULL in-app browser detector (TikTok-proof)
-function isInAppBrowser() {
-  const ua = navigator.userAgent.toLowerCase();
-
-  return (
-    // TikTok variations
-    ua.includes("tiktok") ||
-    ua.includes("ttwebview") ||
-    ua.includes("bytedance") ||
-    ua.includes("musically") ||
-    ua.includes("com.zhiliaoapp.musically") ||
-    ua.includes("aweme") ||
-    ua.includes("gtwebview") ||
-    ua.includes("darwin") ||
-
-    // Instagram
-    ua.includes("instagram") ||
-
-    // Facebook
-    ua.includes("fbav") ||
-    ua.includes("fban") ||
-    ua.includes("fb_iab") ||
-
-    // Messenger
-    ua.includes("messenger") ||
-
-    // Twitter/X
-    ua.includes("twitter") ||
-
-    // Snapchat
-    ua.includes("snapchat")
-  );
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  const overlay = document.getElementById("openBrowserOverlay");
-
-  if (isInAppBrowser()) {
-    overlay.style.display = "flex";
-
-    // Hide page content to force user to open externally
-    document.body.style.overflow = "hidden";
-  }
-});
-</script>
-
 
 
 
