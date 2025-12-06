@@ -176,64 +176,66 @@
   </div>
 	
 
-<div id="externalBrowserOverlay" 
-     style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92);
-     color:white; z-index:9999999; padding:25px; text-align:center; font-family:sans-serif;">
-  
-  <h2 style="font-size:26px; margin-bottom:10px;">Open in Your Browser</h2>
-  <p style="font-size:18px; line-height:1.6; margin-bottom:20px;">
-    This app’s built-in browser can’t open this page correctly.<br>
-    Please tap the menu (<b>⋯</b> or <b>…</b>) and choose:
-  </p>
-
-  <p style="font-size:22px; font-weight:bold; color:#00e0ff;">
-    “Open in Browser”
-  </p>
-
-  <p style="margin-top:25px; font-size:16px; opacity:0.8;">
-    This will open the page in Safari / Chrome automatically.
-  </p>
-</div>
-
 <div id="openBrowserOverlay" 
      style="display:none; position:fixed; inset:0; background:black;
-     color:white; z-index:99999; text-align:center; padding:30px;">
+     color:white; z-index:9999999; text-align:center; padding:30px;">
   
   <h2 style="font-size:26px; margin-bottom:10px;">Open in Browser</h2>
   <p style="font-size:18px; line-height:1.6;">
     This page cannot open inside this app.
+    Tap the menu (<b>⋯</b> or <b>…</b>) and choose:
     <br><br>
-    Tap the menu (<b>⋯</b> or <b>…</b>) and choose 
-    <span style="color:#00d0ff; font-weight:bold;">“Open in browser”</span>
+    <span style="color:#00d0ff; font-weight:bold;">“Open in Browser”</span>
   </p>
-
-  <img src="images/openbrowser.png" width="220" style="margin-top:25px;">
 </div>
 
 <script>
-function isInApp() {
-  const ua = navigator.userAgent || "";
+// FULL in-app browser detector (TikTok-proof)
+function isInAppBrowser() {
+  const ua = navigator.userAgent.toLowerCase();
+
   return (
-    ua.includes("TikTok") ||
-    ua.includes("Instagram") ||
-    ua.includes("FBAN") ||
-    ua.includes("FBAV") ||
-    ua.includes("Messenger") ||
-    ua.includes("Twitter") ||
-    ua.includes("Snapchat") ||
-    ua.includes("Line/")
+    // TikTok variations
+    ua.includes("tiktok") ||
+    ua.includes("ttwebview") ||
+    ua.includes("bytedance") ||
+    ua.includes("musically") ||
+    ua.includes("com.zhiliaoapp.musically") ||
+    ua.includes("aweme") ||
+    ua.includes("gtwebview") ||
+    ua.includes("darwin") ||
+
+    // Instagram
+    ua.includes("instagram") ||
+
+    // Facebook
+    ua.includes("fbav") ||
+    ua.includes("fban") ||
+    ua.includes("fb_iab") ||
+
+    // Messenger
+    ua.includes("messenger") ||
+
+    // Twitter/X
+    ua.includes("twitter") ||
+
+    // Snapchat
+    ua.includes("snapchat")
   );
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (isInApp()) {
-    document.getElementById("openBrowserOverlay").style.display = "block";
+  const overlay = document.getElementById("openBrowserOverlay");
 
-    // Hide your main content too (optional)
+  if (isInAppBrowser()) {
+    overlay.style.display = "flex";
+
+    // Hide page content to force user to open externally
     document.body.style.overflow = "hidden";
   }
 });
 </script>
+
 
 
 
