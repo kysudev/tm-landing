@@ -31042,7 +31042,7 @@ letter-spacing: 0.05rem;
 }
 .listofalbum .singlealbum .imgbox {
   width: 100%;
-  height: 151px;
+  height: 550px;
   border-radius: 4vw;
 }
 .listofalbum .singlealbum .imgbox:after {
@@ -32488,7 +32488,7 @@ letter-spacing: 0.05rem;
   }
   .listofalbum.oddnumber .singlealbum:first-child .imgbox,
   .listofalbum.oddnumber .singlealbum:first-child .imgbox img {
-    height: 53.333vw;
+    height: 90vw;
   }
   .listofalbum .singlealbum .iconbox {
     position: absolute;
@@ -32511,7 +32511,7 @@ letter-spacing: 0.05rem;
   }
   .listofalbum .singlealbum .imgbox {
     width: 100%;
-    height: 28.27vw;
+    height: 90vw;
     border-radius: 4vw;
   }
   .listofalbum .singlealbum .imgbox:after {
